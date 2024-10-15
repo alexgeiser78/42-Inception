@@ -1,0 +1,35 @@
+version: '3' 
+  # not mandatory since Docker-Compose 1.27+, but it's a good practice to specify the version
+
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    build:  #path to build the image
+      context: ./requirements/mariadb
+      dockerfile:  Dockerfile
+    expose:
+           - 3306:3306 #expose the port 3306 to be connected outside the container, 3306 is the default port for mariadb
+            #need to be checked if usefull or not
+    restart: unless-stopped # always restart the container unless it's stopped by docker-compose stop or docker-compose down
+    volumes: 
+      - mariadb_volume:/var/lib/mysql #mount the volume mariadb_volume to /var/lib/mysql
+    env_file: .env #load the environment variables from the .env file
+    networks: 
+      - inception #connect the container to the network inception
+      # - = list of networks even only one is used
+  
+networks:
+  inception: #create a network named inception
+    driver: bridge #use the bridge driver, which isolates de containers from the host network, 
+                   #with multiple services they can communicate with each other, possible to use 
+                   #the service name as a hostname without knowing the IP address, services are accessible
+                   #from outside the network
+
+volumes:
+  mariadb_volume: #create a volume named mariadb_volume used to store the data of the mariadb database outside the container
+    driver: local # the volume is stored on the host machine (this computer)
+    driver_opts: #driver options
+      type: none # indicates that Docker should not create a new volume, but use an existing one
+      o: bind # indicates that Docker has to do a bind mount, which means that the volume is mounted to a specific directory on the host machine
+      device: /home/ageiser/Desktop/inception/mariadb # the path to the directory on the host machine where the volume is mounted
