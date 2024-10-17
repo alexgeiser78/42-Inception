@@ -8,7 +8,7 @@ services:
     build:  #path to build the image
       context: ./requirements/mariadb
       dockerfile:  Dockerfile
-    expose:
+    ports:
            - 3306:3306 #expose the port 3306 to be connected outside the container, 3306 is the default port for mariadb
             #need to be checked if usefull or not
     restart: unless-stopped # always restart the container unless it's stopped by docker-compose stop or docker-compose down
