@@ -32,4 +32,4 @@ volumes:
     driver_opts: #driver options
       type: none # indicates that Docker should not create a new volume, but use an existing one
       o: bind # indicates that Docker has to do a bind mount, which means that the volume is mounted to a specific directory on the host machine
-      device: /home/ageiser/Desktop/inception/mariadb # the path to the directory on the host machine where the volume is mounted
+      device: /home/ageiser/data # the path to the directory on the host machine where the volume is mounted
