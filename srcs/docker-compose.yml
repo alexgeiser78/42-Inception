@@ -2,6 +2,7 @@ version: '3'
   # not mandatory since Docker-Compose 1.27+, but it's a good practice to specify the version
 
 services:
+  
   mariadb:
     image: mariadb:latest
     container_name: mariadb
@@ -19,6 +20,23 @@ services:
       - inception #connect the container to the network inception
       # - = list of networks even only one is used
   
+  wordpress:
+    image: wordpress:latest #official image of wordpress
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      dockerfile:  Dockerfile
+    ports:
+      -9000:9000 #exposed for PHP-FPM with the nginx server communication
+    restart: unless-stopped #on-failure could also be acceptable in this case but unless-stopped is more secure
+    volumes:
+      -wordpress_volume:/var/www/html # root directory where wordpress is installed
+    env_file: .env
+    networks:
+      - inception
+    depends_on:
+      - mariadb #wordpress gonna depend on mariadb so it's gonna wait for mariadb to be ready before starting
+  
 networks:
   inception: #create a network named inception
     driver: bridge #use the bridge driver, which isolates de containers from the host network, 
@@ -33,3 +51,10 @@ volumes:
       type: none # indicates that Docker should not create a new volume, but use an existing one
       o: bind # indicates that Docker has to do a bind mount, which means that the volume is mounted to a specific directory on the host machine
       device: /home/ageiser/data # the path to the directory on the host machine where the volume is mounted
+
+  wordpress_volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ageiser/data/wordpress
