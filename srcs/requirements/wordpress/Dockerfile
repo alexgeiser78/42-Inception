@@ -3,8 +3,8 @@ FROM debian:bullseye
 
 RUN apt-get update && \
 	apt-get -y install \
-	php8.3-fpm \
-	php8.3-mysqli \
+	php7.3-fpm \
+	php7.3-mysqli \
 	mariadb-client \
 	curl \
 	&& rm -rf /var/lib/apt/lists/*
