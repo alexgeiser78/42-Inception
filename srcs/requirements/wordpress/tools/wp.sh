@@ -39,4 +39,4 @@ else
 fi
 
 
-/usr/sbin/php-fpm8.3 -F  #start the php-fpm service with the version 8.3 of php, -F means that PHP-FPM will not daemonize, and will stay in the foreground until the process is killed.
+/usr/sbin/php-fpm7.3 -F  #start the php-fpm service with the version 8.3 of php, -F means that PHP-FPM will not daemonize, and will stay in the foreground until the process is killed.
