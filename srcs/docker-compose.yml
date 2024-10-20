@@ -37,6 +37,23 @@ services:
     depends_on:
       - mariadb #wordpress gonna depend on mariadb so it's gonna wait for mariadb to be ready before starting
   
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    build:
+      context: ./requirements/nginx
+      dockerfile:  Dockerfile
+    ports:
+      - 443:443 #443 is the default port for HTTPS (80 for HTTP)
+    restart: unless-stopped
+    volumes:
+      - wordpress_volume:/var/www/html
+    env_file: .env
+    networks:
+      - inception
+    depends_on:
+      - wordpress #nginx gonna depend on wordpress so it's gonna wait for wordpress to be ready before starting
+
 networks:
   inception: #create a network named inception
     driver: bridge #use the bridge driver, which isolates de containers from the host network, 
