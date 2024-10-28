@@ -22,28 +22,27 @@ ifneq (, $(wildcard srcs/requirements/tools/path.txt))  #check if path.txt exist
 endif
 
 all:
-	@echo "WP dir" $(wordpress_dir)
-	@echo "DB dir" $(mariadb_dir)
-ifeq (,$(wildcard ./srcs/requirements/tools/path.txt))
-	@bash ./srcs/requirements/tools/set.sh 
-	@echo "$(GREEN)Everything is set up!$(RESET)"
-	@echo "Please run make to start the server"
-else
-ifeq (,$(wildcard $(mariadb_dir))) #if the dir mariadb_dir does not exist, create it with all the necessary permissions
-	@echo "WP dir" $(wordpress_dir)
-	@echo "DB dir" $(mariadb_dir)
-	
-	@sudo mkdir -p $(mariadb_dir)
-	@sudo mkdir -p $(wordpress_dir)
-	@sudo chmod 777 $(mariadb_dir)
-	@sudo chmod 777 $(wordpress_dir)
-	if [ -d $(mariadb_dir) ]; then echo "$(GREEN)Mariadb directory created$(RESET)"; fi
-	if [ -d $(wordpress_dir) ]; then echo "$(GREEN)Wordpress directory created$(RESET)"; fi
-endif
-	@echo "$(GREEN)Starting the server...$(RESET)"
-	@sleep 1
-	@sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
-endif
+	@if [ ! -f srcs/requirements/tools/path.txt ]; then \
+		bash ./srcs/requirements/tools/set.sh; \
+		echo "$(GREEN)Everything is set up!$(RESET)"; \
+		echo "Please run make to start the server"; \
+	else \
+		if [ ! -d "$(mariadb_dir)" ]; then \
+			echo "Creating $(mariadb_dir)..."; \
+			sudo mkdir -p $(mariadb_dir); \
+			sudo chmod 777 $(mariadb_dir); \
+		fi; \
+		if [ ! -d "$(wordpress_dir)" ]; then \
+			echo "Creating $(wordpress_dir)..."; \
+			sudo mkdir -p $(wordpress_dir); \
+			sudo chmod 777 $(wordpress_dir); \
+		fi; \
+		echo "$(GREEN)Starting the server...$(RESET)"; \
+		sleep 1; \
+		sudo docker-compose -f ./srcs/docker-compose.yml up -d --build; \
+	fi
+
+
 
 up : 
 	@echo "$(GREEN)Start the server and mount the volumes...$(RESET)"
