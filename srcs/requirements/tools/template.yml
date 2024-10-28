@@ -23,7 +23,7 @@ services:
         build:
             context: ./requirements/wordpress
             dockerfile: Dockerfile
-        ports:
+        expose:
           - 9000:9000
         restart: unless-stopped
         volumes:
