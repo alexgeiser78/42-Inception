@@ -45,24 +45,24 @@ endif
 
 up : 
 	@echo "$(GREEN)Start the server and mount the volumes...$(RESET)"
-	@docker-compose -f ./srcs/docker-compose.yml up -d
+	@sudo docker-compose -f ./srcs/docker-compose.yml up -d
 #launch ther docker container defined in the docker-compose.yml file
 # -d flag is for detached mode, it will run the containers in the background
 # to test without @
 
 down : 
 	@echo "$(RED)Stop the server and unmount the volumes...$(RESET)"
-	@docker-compose -f ./srcs/docker-compose.yml down
+	@sudo docker-compose -f ./srcs/docker-compose.yml down
 #stop and remove the containers defined in the docker-compose.yml file
 
 start :
 	@echo "$(GREEN)Starting the server...$(RESET)"
-	@docker-compose -f ./srcs/docker-compose.yml start
+	@sudo docker-compose -f ./srcs/docker-compose.yml start
 #restart the containers that have been stopped by stop, containers and volumes reusued
 
 stop : 
 	@echo "$(RED)Stopping the server...$(RESET)"
-	@docker-compose -f ./srcs/docker-compose.yml stop
+	@sudo docker-compose -f ./srcs/docker-compose.yml stop
 #stop the containers without removing containers and volumes
 
 fclean:
@@ -82,7 +82,7 @@ reset: clean
 
 
 status : 
-	@docker ps
+	@sudo docker ps
 #list all running containers
 
 .PHONY: all up down start stop fclean reset re status
