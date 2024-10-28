@@ -9,7 +9,7 @@ services:
             context: ./requirements/mariadb
             dockerfile: Dockerfile
         expose:
-           - 3306:3306
+           - 3306
         restart: unless-stopped
         volumes:
             - mariadb_volume:/var/lib/mysql
@@ -24,7 +24,7 @@ services:
             context: ./requirements/wordpress
             dockerfile: Dockerfile
         expose:
-          - 9000:9000
+          - 9000
         restart: unless-stopped
         volumes:
             - wordpress_volume:/var/www/html
