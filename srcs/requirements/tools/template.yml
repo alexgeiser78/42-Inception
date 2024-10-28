@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+
+    mariadb:
+        image: mariadb:latest
+        container_name: mariadb
+        build:
+            context: ./requirements/mariadb
+            dockerfile: Dockerfile
+        expose:
+           - 3306:3306
+        restart: unless-stopped
+        volumes:
+            - mariadb_volume:/var/lib/mysql
+        env_file: .env
+        networks:
+            - inception
+    
+     wordpress:
+        image: wordpress:latest
+        container_name: wordpress
+        build:
+            context: ./requirements/wordpress
+            dockerfile: Dockerfile
+        ports:
+          - 9000:9000
+        restart: unless-stopped
+        volumes:
+            - wordpress_volume:/var/www/html
+        env_file: .env
+        networks:
+            - inception        
+        depends_on:
+            - mariadb
+        
+      
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        build:
+            context: ./requirements/nginx
+            dockerfile: Dockerfile
+        ports:
+            - 443:443
+        restart: unless-stopped
+        volumes:
+            - wordpress_volume:/var/www/html
+        env_file: .env
+        networks:
+            - inception        
+        depends_on:
+            - wordpress
+
+networks:
+    inception:
+      name: inception
+      driver: bridge
+   
+volumes:
+    mariadb_volume:
+        driver: local
+        driver_opts:
+          type: none
+          o: bind
+          device: 'pathtodata/mariadb' #space reserved, it's gonna be edited by the script set.sh with the data from the user after the prompt
+    
+    wordpress_volume:
+        driver: local
+        driver_opts:
+          type: none
+          o: bind
+          device: 'pathtodata/wordpress'  
+    

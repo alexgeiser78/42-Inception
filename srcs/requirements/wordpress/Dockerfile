@@ -23,7 +23,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 #give the execution rights to the file
 #move the file to the /usr/local/bin/ directory to make it available anywhere in the container
 
-COPY ./conf/wp.conf /etc/php/7.4/fpm/pool.d/
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/
 #copy the www.conf file to the php-fpm configuration directory
 #this file is used to configure the php-fpm POOL(group of processes)
 

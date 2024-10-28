@@ -9,7 +9,7 @@ services:
     build:  #path to build the image
       context: ./requirements/mariadb
       dockerfile:  Dockerfile
-    ports:
+    expose:
            - 3306:3306 #expose the port 3306 to be connected outside the container, 3306 is the default port for mariadb
             #need to be checked if usefull or not
     restart: unless-stopped # always restart the container unless it's stopped by docker-compose stop or docker-compose down
@@ -26,7 +26,7 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile:  Dockerfile
-    ports:
+    expose:
       - 9000:9000 #exposed for PHP-FPM with the nginx server communication
     restart: unless-stopped #on-failure could also be acceptable in this case but unless-stopped is more secure
     volumes:
@@ -67,11 +67,11 @@ volumes:
     driver_opts: #driver options
       type: none # indicates that Docker should not create a new volume, but use an existing one
       o: bind # indicates that Docker has to do a bind mount, which means that the volume is mounted to a specific directory on the host machine
-      device: /home/ageiser/data # the path to the directory on the host machine where the volume is mounted
+      device: /home/ageiser/data/mariadb # the path to the directory on the host machine where the volume is mounted
 
   wordpress_volume:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/ageiser/data
+      device: /home/ageiser/data/wordpress

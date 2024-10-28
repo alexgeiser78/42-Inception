@@ -1,5 +1,5 @@
 #!/bin/bash  
-# we have to unse bash to run the script
+# we have to use bash to run the script
 
 if [ -f ./wp-config.php ] # check if the default config file exists in folder /var/www/html
 then
