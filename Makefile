@@ -19,11 +19,11 @@ ifneq (, $(wildcard srcs/requirements/tools/path.txt))  #check if path.txt exist
 	variable := $(shell cat ${dir_path}) 
 	wordpress_dir := $(shell echo ${variable}/wordpress)
 	mariadb_dir := $(shell echo ${variable}/mariadb)
-	@echo "WP dir" $(wordpress_dir)
-	@echo "DB dir" $(mariadb_dir)
 endif
 
 all:
+	@echo "WP dir" $(wordpress_dir)
+	@echo "DB dir" $(mariadb_dir)
 ifeq (,$(wildcard ./srcs/requirements/tools/path.txt))
 	@bash ./srcs/requirements/tools/set.sh 
 	@echo "$(GREEN)Everything is set up!$(RESET)"
