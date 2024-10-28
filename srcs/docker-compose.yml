@@ -9,7 +9,7 @@ services:
     build:  #path to build the image
       context: ./requirements/mariadb
       dockerfile:  Dockerfile
-    expose:
+    ports:
            - 3306:3306 #expose the port 3306 to be connected outside the container, 3306 is the default port for mariadb
             #need to be checked if usefull or not
     restart: unless-stopped # always restart the container unless it's stopped by docker-compose stop or docker-compose down
@@ -26,7 +26,7 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile:  Dockerfile
-    expose:
+    ports:
       - 9000:9000 #exposed for PHP-FPM with the nginx server communication
     restart: unless-stopped #on-failure could also be acceptable in this case but unless-stopped is more secure
     volumes:
