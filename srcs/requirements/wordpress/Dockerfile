@@ -27,7 +27,7 @@ COPY ./conf/wp.conf /etc/php/7.4/fpm/pool.d/
 #copy the www.conf file to the php-fpm configuration directory
 #this file is used to configure the php-fpm POOL(group of processes)
 
-COPY ./tools/wp.sh /usr/local/bin/wp-config.sh
+COPY ./tools/wp-config.sh /usr/local/bin/wp-config.sh
 RUN chmod +x /usr/local/bin/wp-config.sh
 #copy the script that will configure the Wordpress
 #give the execution rights to the script
