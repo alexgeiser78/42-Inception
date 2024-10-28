@@ -17,7 +17,7 @@ services:
         networks:
             - inception
     
-     wordpress:
+    wordpress:
         image: wordpress:latest
         container_name: wordpress
         build:
