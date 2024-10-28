@@ -16,7 +16,7 @@ RESET = \033[0m
 
 ifneq (, $(wildcard srcs/requirements/tools/path.txt))  #check if path.txt exists, if it exists, assign the path to dir_path, variable coantains the cat of the path, ssignation of the path to wordpress_dir and mariadb_dir
 	dir_path := srcs/requirements/tools/path.txt            
-	variable := $(shell cat ${dir_path}) 
+	variable := $(shell echo -n cat ${dir_path}) 
 	wordpress_dir := $(shell echo -n ${variable}/wordpress)
 	mariadb_dir := $(shell echo -n ${variable}/mariadb)
 endif
