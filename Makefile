@@ -35,7 +35,7 @@ ifeq (,$(wildcard $(mariadb_dir))) #if the dir mariadb_dir does not exist, creat
 endif
 	@echo "$(GREEN)Starting the server...$(RESET)"
 	@sleep 1
-	@sudo docker compose -f ./srcs/docker-compose.yml up -d --build
+	@sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
 endif
 
 up : 
