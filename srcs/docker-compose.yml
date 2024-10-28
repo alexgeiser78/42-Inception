@@ -4,7 +4,7 @@ version: '3'
 services:
   
   mariadb:
-    image: mariadb:latest
+    image: mariadb
     container_name: mariadb
     build:  #path to build the image
       context: ./requirements/mariadb
@@ -21,7 +21,7 @@ services:
       # - = list of networks even only one is used
   
   wordpress:
-    image: wordpress:latest #official image of wordpress
+    image: wordpress #official image of wordpress
     container_name: wordpress
     build:
       context: ./requirements/wordpress
@@ -38,7 +38,7 @@ services:
       - mariadb #wordpress gonna depend on mariadb so it's gonna wait for mariadb to be ready before starting
   
   nginx:
-    image: nginx:latest
+    image: nginx
     container_name: nginx
     build:
       context: ./requirements/nginx
