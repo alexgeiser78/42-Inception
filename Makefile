@@ -12,7 +12,7 @@
 
 RED = \033[1;31m
 GREEN = \033[1;32m
-RESET = \033[0ma
+RESET = \033[0m
 
 ifneq (, $(wildcard srcs/requirements/tools/path.txt))  #check if path.txt exists, if it exists, assign the path to dir_path, variable coantains the cat of the path, ssignation of the path to wordpress_dir and mariadb_dir
 	dir_path := srcs/requirements/tools/path.txt            
