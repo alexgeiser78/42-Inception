@@ -26,8 +26,6 @@ endif
 all:
 	@if [ ! -f srcs/requirements/tools/path.txt ]; then \
 		bash ./srcs/requirements/tools/set.sh; \
-		echo "$(GREEN)Everything is set up!$(RESET)"; \
-		echo "Please run make to start the server"; \
 	elif [ -z "$(variable)" ]; then \
 		echo "$(RED)ERROR: empty path$(RESET)"; \
 		exit 1; \
