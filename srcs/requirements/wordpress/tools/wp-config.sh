@@ -24,7 +24,7 @@ else
 		--role=author
 	wp theme install --allow-root \
 		--activate \
-		neve
+		rainfall
 	echo -e "\033[0;32mwp-config.php file created\033[0m"
 fi
 
