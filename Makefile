@@ -32,21 +32,20 @@ all:
 		echo "$(RED)ERROR: empty path$(RESET)"; \
 		exit 1; \
 	else \
-
-	if [ ! -d "$(mariadb_dir)" ]; then \
+		if [ ! -d "$(mariadb_dir)" ]; then \
 			echo "Creating $(mariadb_dir)..."; \
 			sudo mkdir -p $(mariadb_dir); \
 			sudo chmod 777 $(mariadb_dir); \
-	fi; \
-	if [ ! -d "$(wordpress_dir)" ]; then \
+		fi; \
+		if [ ! -d "$(wordpress_dir)" ]; then \
 			echo "Creating $(wordpress_dir)..."; \
 			sudo mkdir -p $(wordpress_dir); \
 			sudo chmod 777 $(wordpress_dir); \
-	fi; \
-	echo "$(GREEN)Starting the server...$(RESET)"; \
-	sleep 1; \
-	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build; \
-fi
+		fi; \
+		echo "$(GREEN)Starting the server...$(RESET)"; \
+		sleep 1; \
+		sudo docker-compose -f ./srcs/docker-compose.yml up -d --build; \
+	fi
 
 up : 
 	@echo "$(GREEN)Start the server and mount the volumes...$(RESET)"
