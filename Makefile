@@ -16,9 +16,11 @@ RESET = \033[0m
 
 ifneq (, $(wildcard srcs/requirements/tools/path.txt))  #check if path.txt exists, if it exists, assign the path to dir_path, variable coantains the cat of the path, ssignation of the path to wordpress_dir and mariadb_dir
 	dir_path := srcs/requirements/tools/path.txt            
-	variable := $(shell cat ${dir_path}) 
-	wordpress_dir := $(variable)/wordpress
-	mariadb_dir := $(variable)/mariadb
+	variable := $(shell cat ${dir_path})
+	ifneq ($(variable),)
+		wordpress_dir := $(variable)/wordpress
+		mariadb_dir := $(variable)/mariadb
+	endif
 endif
 
 all:
@@ -26,7 +28,11 @@ all:
 		bash ./srcs/requirements/tools/set.sh; \
 		echo "$(GREEN)Everything is set up!$(RESET)"; \
 		echo "Please run make to start the server"; \
-	fi; \
+	elif [ -z "$(variable)" ]; then \
+		echo "$(RED)ERROR: empty path$(RESET)"; \
+		exit 1; \
+	else \
+
 	if [ ! -d "$(mariadb_dir)" ]; then \
 			echo "Creating $(mariadb_dir)..."; \
 			sudo mkdir -p $(mariadb_dir); \
@@ -40,7 +46,7 @@ all:
 	echo "$(GREEN)Starting the server...$(RESET)"; \
 	sleep 1; \
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build;
-
+fi
 
 up : 
 	@echo "$(GREEN)Start the server and mount the volumes...$(RESET)"
@@ -66,8 +72,12 @@ stop :
 
 fclean:
 	@echo "$(RED)Removing the server...$(RESET)"
-	@sudo rm -rf $(mariadb_dir)
-	@sudo rm -rf $(wordpress_dir)
+	@if [ ! -z "$(mariadb_dir)" ]; then \
+		sudo rm -rf $(mariadb_dir); \
+	fi
+	@if [ ! -z "$(wordpress_dir)" ]; then \
+		sudo rm -rf $(wordpress_dir); \
+	fi
 	if [ -f srcs/requirements/tools/path.txt ]; then \
 		sudo rm ./srcs/requirements/tools/path.txt; \
 	fi
