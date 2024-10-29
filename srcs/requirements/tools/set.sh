@@ -9,7 +9,7 @@ if [ ! -d "$path" ]; then
 	echo -e "\033[0;31mThis directory does not exist. You must create it first.\033[0m"
 	exit 1
 fi
-echo -e "\032[0;32mThe path has been set to $path\032[0m"
+echo -e "\033[0;32mThe path has been set to $path\033[0m"
 echo "Run "make" again to start the services"
 
 echo "$path" > srcs/requirements/tools/path.txt
