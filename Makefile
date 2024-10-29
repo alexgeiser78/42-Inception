@@ -78,7 +78,7 @@ fclean:
 	@if [ ! -z "$(wordpress_dir)" ]; then \
 		sudo rm -rf $(wordpress_dir); \
 	fi
-	if [ -f srcs/requirements/tools/path.txt ]; then \
+	@if [ -f srcs/requirements/tools/path.txt ]; then \
 		sudo rm ./srcs/requirements/tools/path.txt; \
 	fi
 	@sudo docker system prune -af 
