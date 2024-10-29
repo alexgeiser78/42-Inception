@@ -31,9 +31,8 @@ COPY ./tools/mariadb.sh /usr/local/bin/mariadb.sh
 RUN chmod +x /usr/local/bin/mariadb.sh
 # give the execution rights to the script
 
-RUN mysql_install_db
+RUN mysqld --initialize-insecure --user=mysql
 # initialize the base files of the mariadb database by default, prepares the environemnt of mariadb in the container
-
 
 ENTRYPOINT [ "/usr/local/bin/mariadb.sh" ]
 # the script will be executed everytime the container starts

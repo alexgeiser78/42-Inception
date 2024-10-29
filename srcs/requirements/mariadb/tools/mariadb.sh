@@ -1,6 +1,11 @@
 #!/bin/bash
 
-service mysql start;
+mysqld_safe --user=mysql &
+
+until mysqladmin ping --silent; do
+    echo "Waiting for database connection..."
+    sleep 1
+done
 
 if [ ! -d /var/lib/mysql/${MYSQL_DATABASE} ];
 then
@@ -15,7 +20,7 @@ then
     echo "mysql shutdown"
     mysqladmin -u ${MYSQL_ROOT_USER} --password=${MYSQL_ROOT_PASSWORD} shutdown
 
-    mysql
+    exec mysqld --user=mysql --console
 
 #3 start the service
 #5 check if the database doesn't exists(! -d ), ${MYSQL_DATABASE} = env variable
