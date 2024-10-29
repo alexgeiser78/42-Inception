@@ -16,9 +16,9 @@ RESET = \033[0m
 
 ifneq (, $(wildcard srcs/requirements/tools/path.txt))  #check if path.txt exists, if it exists, assign the path to dir_path, variable coantains the cat of the path, ssignation of the path to wordpress_dir and mariadb_dir
 	dir_path := srcs/requirements/tools/path.txt            
-	variable := $(shell echo -n cat ${dir_path}) 
-	wordpress_dir := $(shell echo -n ${variable}/wordpress)
-	mariadb_dir := $(shell echo -n ${variable}/mariadb)
+	variable := $(shell cat ${dir_path}) 
+	wordpress_dir := $(shell $(variable)/wordpress)
+	mariadb_dir := $(shell $(variable)/mariadb)
 endif
 
 all:
@@ -26,20 +26,20 @@ all:
 		bash ./srcs/requirements/tools/set.sh; \
 		echo "$(GREEN)Everything is set up!$(RESET)"; \
 		echo "Please run make to start the server"; \
-	else \
-		if [ ! -d "$(mariadb_dir)" ]; then \
+	
+	if [ ! -d "$(mariadb_dir)" ]; then \
 			echo "Creating $(mariadb_dir)..."; \
 			sudo mkdir -p $(mariadb_dir); \
 			sudo chmod 777 $(mariadb_dir); \
-		fi; \
-		if [ ! -d "$(wordpress_dir)" ]; then \
+	fi; \
+	if [ ! -d "$(wordpress_dir)" ]; then \
 			echo "Creating $(wordpress_dir)..."; \
 			sudo mkdir -p $(wordpress_dir); \
 			sudo chmod 777 $(wordpress_dir); \
-		fi; \
-		echo "$(GREEN)Starting the server...$(RESET)"; \
-		sleep 1; \
-		sudo docker-compose -f ./srcs/docker-compose.yml up -d --build; \
+	fi; \
+	echo "$(GREEN)Starting the server...$(RESET)"; \
+	sleep 1; \
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build; \
 	fi
 
 
@@ -70,7 +70,9 @@ fclean:
 	@echo "$(RED)Removing the server...$(RESET)"
 	@sudo rm -rf $(mariadb_dir)
 	@sudo rm -rf $(wordpress_dir)
-	@sudo rm ./srcs/requirements/tools/path.txt
+	if [ -f srcs/requirements/tools/path.txt ]; then \
+		sudo rm ./srcs/requirements/tools/path.txt; \
+	fi
 	@sudo docker system prune -af 
 #prune, remove all stopped containers, all networks not used by at least one container, all dangling images, all build cache
 

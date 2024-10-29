@@ -30,7 +30,7 @@ services:
       - 9000 #exposed for PHP-FPM with the nginx server communication
     restart: unless-stopped #on-failure could also be acceptable in this case but unless-stopped is more secure
     volumes:
-      - wordpress_volume:/var/www/html # root directory where wordpress is installed
+      - wordpress_volume:/var/www/html# root directory where wordpress is installed
     env_file: .env
     networks:
       - inception
