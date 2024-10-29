@@ -14,8 +14,8 @@ RUN openssl req -newkey rsa:4096 \
         -sha256 \
         -days 365 \
         -nodes \
-        -out ${CERTOUT} \
-        -keyout ${KEYOUT} \
+        -out /etc/nginx/ssl/certificate.crt \
+        -keyout /etc/nginx/ssl/certificate.key \
         -subj "/C=ES/ST=BARCELONA/L=BARCELONA/O=42/OU=ageiser/CN=ageiser"
 #create a self-signed certificate and a private key
 #openssl req is the command to create a certificate request(CSR), automatically signed by the user
