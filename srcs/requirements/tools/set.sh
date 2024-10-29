@@ -1,5 +1,3 @@
-echo -e "\033[0;32m-------CONFIGURING ENVIRONMENT-------\033[0m"
-
 printf "Enter the path to the directory where you want to store the data: "
 printf "\nExample: /home/user/data\n"
 read path
