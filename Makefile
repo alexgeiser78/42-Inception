@@ -26,17 +26,17 @@ all:
 		bash ./srcs/requirements/tools/set.sh; \
 		echo "$(GREEN)Everything is set up!$(RESET)"; \
 		echo "Please run make to start the server"; \
-	
+	fi;
 	if [ ! -d "$(mariadb_dir)" ]; then \
 			echo "Creating $(mariadb_dir)..."; \
 			sudo mkdir -p $(mariadb_dir); \
 			sudo chmod 777 $(mariadb_dir); \
-	fi; \
+	fi;
 	if [ ! -d "$(wordpress_dir)" ]; then \
 			echo "Creating $(wordpress_dir)..."; \
 			sudo mkdir -p $(wordpress_dir); \
 			sudo chmod 777 $(wordpress_dir); \
-	fi; \
+	fi;
 	echo "$(GREEN)Starting the server...$(RESET)"; \
 	sleep 1; \
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build; \
