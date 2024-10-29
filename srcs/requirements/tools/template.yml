@@ -3,7 +3,7 @@ version: '3'
 services:
 
     mariadb:
-        image: mariadb:latest
+        image: mariadb
         container_name: mariadb
         build:
             context: ./requirements/mariadb
@@ -18,7 +18,7 @@ services:
             - inception
     
     wordpress:
-        image: wordpress:latest
+        image: wordpress
         container_name: wordpress
         build:
             context: ./requirements/wordpress
@@ -36,7 +36,7 @@ services:
         
       
     nginx:
-        image: nginx:latest
+        image: nginx
         container_name: nginx
         build:
             context: ./requirements/nginx

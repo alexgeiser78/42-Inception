@@ -28,9 +28,9 @@ services:
       dockerfile:  Dockerfile
     expose:
       - 9000 #exposed for PHP-FPM with the nginx server communication
-    restart: on-failure #on-failure could also be acceptable in this case but unless-stopped is more secure
+    restart: unless-stopped #on-failure could also be acceptable in this case but unless-stopped is more secure
     volumes:
-      - wordpress_volume:/var/www/html# root directory where wordpress is installed
+      - wordpress_volume:/var/www/html #root directory where wordpress is installed
     env_file: .env
     networks:
       - inception
@@ -56,6 +56,7 @@ services:
 
 networks:
   inception: #create a network named inception
+    name: inception
     driver: bridge #use the bridge driver, which isolates de containers from the host network, 
                    #with multiple services they can communicate with each other, possible to use 
                    #the service name as a hostname without knowing the IP address, services are accessible
