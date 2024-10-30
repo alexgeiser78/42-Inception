@@ -9,7 +9,14 @@ else
 		--dbname=$MYSQL_DATABASE \
 		--dbuser=$MYSQL_USER \
 		--dbpass=$MYSQL_PASSWORD \
-		--dbhost=mariadb
+		--dbhost=mariadb \
+		--extra-php <<PHP
+	define( 'WP_HOME', 'https://$DOMAIN_NAME' );
+	define( 'WP_SITEURL', 'https://$DOMAIN_NAME' );
+	define( 'WP_DEBUG', true );
+	define( 'WP_DEBUG_LOG', true );
+	define( 'WP_DEBUG_DISPLAY', false );
+	PHP
 	wp core install --url=$DOMAIN_NAME \
 		--title="$SITE_TITLE" \
 		--admin_user=$ADMIN_USER \
