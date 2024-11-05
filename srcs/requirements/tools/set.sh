@@ -1,4 +1,4 @@
-printf "Enter the path to the directory where you want to store the data: "
+printf "Path to the data directory: "
 printf "\nExample: /home/user/data\n"
 read path
 #prompt to set the path to the data directory
@@ -6,7 +6,7 @@ read path
 
 
 if [ ! -d "$path" ]; then
-	echo -e "\033[0;31mThis directory does not exist. You must create it first.\033[0m"
+	echo -e "\033[0;31mThis directory does not exist. Create it first.\033[0m"
 	exit 1
 fi
 echo -e "\033[0;32mThe path has been set to $path\033[0m"

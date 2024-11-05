@@ -23,12 +23,13 @@ then
     exec mysqld --user=mysql --console
 
 #3 start the service
-#5 check if the database doesn't exists(! -d ), ${MYSQL_DATABASE} = env variable
-#8 create the database with the root user and password
-#8 -u = user, -p = password, -e = execute
-#10 #@'%' = can connect from any ip address
-#10 grant all privileges to the user created above and can grant the privileges to other users
-#12 reload the privileges
-#13 without this, the root user won't have a password or the one by default
-#17 mysqladmin = admin tool for mysql, shutdown = shutdown the server
-#19 starts the mysql server process
+#5 bash infinity loop until the database is connected
+#10 check if the database doesn't exists(! -d ), ${MYSQL_DATABASE} = env variable
+#13 create the database with the root user and password
+#13 -u = user, -p = password, -e = execute
+#14 #@'%' = can connect from any ip address
+#15 grant all privileges to the user created above and can grant the privileges to other users
+#16 reload the privileges
+#16 without this, the root user won't have a password or the one by default
+#21 mysqladmin = admin tool for mysql, shutdown = shutdown the server
+#23 starts the mysql server process

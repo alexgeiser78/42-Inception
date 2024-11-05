@@ -22,6 +22,7 @@ ifneq (, $(wildcard srcs/requirements/tools/path.txt))  #check if path.txt exist
 		mariadb_dir := $(variable)/mariadb
 	endif
 endif
+#check if the path is empty, if it is, assign the path to wordpress_dir and mariadb_dir
 
 all:
 	@if [ ! -f srcs/requirements/tools/path.txt ]; then \

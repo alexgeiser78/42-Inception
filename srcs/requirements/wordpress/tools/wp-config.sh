@@ -54,4 +54,4 @@ fi
 #31 check if the directory /run/php doesn't exists
 #34 create the directory /run/php
 #35 change the permissions of the directory
-#41   #start the php-fpm service with the version 8.3 of php, -F means that PHP-FPM will not daemonize, and will stay in the foreground until the process is killed.
+#41   #start the php-fpm service with the version 7.4 of php, -F means that PHP-FPM will not daemonize, and will stay in the foreground until the process is killed.
