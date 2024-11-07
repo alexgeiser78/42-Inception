@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # syntax used in this file
 
-FROM debian:bullseye
+FROM debian:11.11
 # the base image is gonna use the debian bullseye image for OS
 
 RUN apt-get update && apt-get install -y \

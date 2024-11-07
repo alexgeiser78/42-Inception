@@ -1,5 +1,5 @@
 #syntax=docker/dockerfile:1
-FROM debian:bullseye
+FROM debian:11.11
 
 RUN apt-get -y update && apt-get -y upgrade \
 	&& apt-get -y install nginx openssl

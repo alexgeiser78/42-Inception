@@ -33,53 +33,53 @@ all:
 	else \
 		if [ ! -d "$(mariadb_dir)" ]; then \
 			echo "Creating $(mariadb_dir)..."; \
-			sudo mkdir -p $(mariadb_dir); \
-			sudo chmod 777 $(mariadb_dir); \
+			mkdir -p $(mariadb_dir); \
+			chmod 777 $(mariadb_dir); \
 		fi; \
 		if [ ! -d "$(wordpress_dir)" ]; then \
 			echo "Creating $(wordpress_dir)..."; \
-			sudo mkdir -p $(wordpress_dir); \
-			sudo chmod 777 $(wordpress_dir); \
+			mkdir -p $(wordpress_dir); \
+			chmod 777 $(wordpress_dir); \
 		fi; \
 		echo "$(GREEN)Starting the server...$(RESET)"; \
 		sleep 1; \
-		sudo docker-compose -f ./srcs/docker-compose.yml up -d --build; \
+		docker-compose -f ./srcs/docker-compose.yml up -d --build; \
 	fi
 
 up : 
 	@echo "$(GREEN)Start the server and mount the volumes...$(RESET)"
-	@sudo docker-compose -f ./srcs/docker-compose.yml up -d
+	@docker-compose -f ./srcs/docker-compose.yml up -d
 #launch ther docker container defined in the docker-compose.yml file
 # -d flag is for detached mode, it will run the containers in the background
 # to test without @
 
 down : 
 	@echo "$(RED)Stop the server and unmount the volumes...$(RESET)"
-	@sudo docker-compose -f ./srcs/docker-compose.yml down
+	@docker-compose -f ./srcs/docker-compose.yml down
 #stop and remove the containers defined in the docker-compose.yml file
 
 start :
 	@echo "$(GREEN)Starting the server...$(RESET)"
-	@sudo docker-compose -f ./srcs/docker-compose.yml start
+	@docker-compose -f ./srcs/docker-compose.yml start
 #restart the containers that have been stopped by stop, containers and volumes reusued
 
 stop : 
 	@echo "$(RED)Stopping the server...$(RESET)"
-	@sudo docker-compose -f ./srcs/docker-compose.yml stop
+	@docker-compose -f ./srcs/docker-compose.yml stop
 #stop the containers without removing containers and volumes
 
 fclean:
 	@echo "$(RED)Removing the server...$(RESET)"
 	@if [ ! -z "$(mariadb_dir)" ]; then \
-		sudo rm -rf $(mariadb_dir); \
+		rm -rf $(mariadb_dir); \
 	fi
 	@if [ ! -z "$(wordpress_dir)" ]; then \
-		sudo rm -rf $(wordpress_dir); \
+		rm -rf $(wordpress_dir); \
 	fi
 	@if [ -f srcs/requirements/tools/path.txt ]; then \
-		sudo rm ./srcs/requirements/tools/path.txt; \
+		rm ./srcs/requirements/tools/path.txt; \
 	fi
-	@sudo docker system prune -af 
+	@docker system prune -af 
 #prune, remove all stopped containers, all networks not used by at least one container, all dangling images, all build cache
 
 re: fclean all
@@ -91,7 +91,7 @@ reset: clean
 
 
 status : 
-	@sudo docker ps
+	@docker ps
 #list all running containers
 
 .PHONY: all up down start stop fclean reset re status

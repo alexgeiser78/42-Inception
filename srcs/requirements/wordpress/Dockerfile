@@ -1,5 +1,5 @@
 #syntax=docker/dockerfile:1
-FROM debian:bullseye
+FROM debian:11.11
 
 RUN apt-get update && \
 	apt-get -y install \
@@ -16,10 +16,12 @@ RUN apt-get update && \
 #curl is a tool to transfer data from or to a server with URL syntax
 #remove the package lists to reduce the docker image size
 
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-	&& chmod +x wp-cli.phar \
-	&& mv wp-cli.phar /usr/local/bin/wp
-#download the wp-cli.phar file which is the main file of the wp-cli tool which is a interface in command line to interact with WP
+RUN curl -fsSL https://packages.sury.org/php/README.txt | bash - && \
+curl -sS https://wordpress.org/latest.tar.gz | tar xz -C /var/www/html --strip-components=1 && \
+chown -R www-data:www-data /var/www/html && \
+chmod -R 755 /var/www/html
+#download the official version of Wordpress from the official website
+#--strip-components=1 is used to extract the content of the archive in the /var/www/html directory
 #give the execution rights to the file
 #move the file to the /usr/local/bin/ directory to make it available anywhere in the container
 
