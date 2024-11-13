@@ -6,11 +6,18 @@ read path
 
 
 if [ ! -d "$path" ]; then
-	echo -e "\033[0;31mThis directory does not exist. Create it first.\033[0m"
-	exit 1
+	echo -e "\033[0;31mThis directory does not exist. Do you want to create it? (y/n)\033[0m"
+	read create_dir
+    if [ "$create_dir" = "y" ]; then
+        mkdir -p "$path"
+        echo "Directory $path succesfully created."
+    else
+        echo "Installation abortion."
+        exit 1
+    fi
 fi
 echo -e "\033[0;32mThe path has been set to $path\033[0m"
-echo "Run "make" again to start the services"
+#echo "Run "make" again to start the services"
 
 echo "$path" > srcs/requirements/tools/path.txt
 #stores the path in path.txt
