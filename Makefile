@@ -33,12 +33,12 @@ all:
 	else \
 		if [ ! -d "$(mariadb_dir)" ]; then \
 			echo "Creating $(mariadb_dir)..."; \
-			mkdir -p $(mariadb_dir); \
+			sudo mkdir -p $(mariadb_dir); \
 			chmod 777 $(mariadb_dir); \
 		fi; \
 		if [ ! -d "$(wordpress_dir)" ]; then \
 			echo "Creating $(wordpress_dir)..."; \
-			mkdir -p $(wordpress_dir); \
+			sudo mkdir -p $(wordpress_dir); \
 			chmod 777 $(wordpress_dir); \
 		fi; \
 		echo "$(GREEN)Starting the server...$(RESET)"; \
