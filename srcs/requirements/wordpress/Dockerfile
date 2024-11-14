@@ -16,6 +16,11 @@ RUN apt-get update && \
 #curl is a tool to transfer data from or to a server with URL syntax
 #remove the package lists to reduce the docker image size
 
+#Install WP-CLI
+RUN curl -o https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+chmod +x wp-cli.phar && \
+mv wp-cli.phar /usr/local/bin/wp
+
 RUN mkdir -p /var/www/html && \
 curl -fsSL https://packages.sury.org/php/README.txt | bash - && \
 curl -sS https://wordpress.org/latest.tar.gz | tar xz -C /var/www/html --strip-components=1 && \
