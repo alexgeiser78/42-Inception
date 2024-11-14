@@ -56,7 +56,6 @@ services:
 
 networks:
   inception: #create a network named inception
-    name: inception
     driver: bridge #use the bridge driver, which isolates de containers from the host network, 
                    #with multiple services they can communicate with each other, possible to use 
                    #the service name as a hostname without knowing the IP address, services are accessible
