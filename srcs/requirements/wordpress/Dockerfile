@@ -16,7 +16,8 @@ RUN apt-get update && \
 #curl is a tool to transfer data from or to a server with URL syntax
 #remove the package lists to reduce the docker image size
 
-RUN curl -fsSL https://packages.sury.org/php/README.txt | bash - && \
+RUN mkdir -p /var/www/html && \
+curl -fsSL https://packages.sury.org/php/README.txt | bash - && \
 curl -sS https://wordpress.org/latest.tar.gz | tar xz -C /var/www/html --strip-components=1 && \
 chown -R www-data:www-data /var/www/html && \
 chmod -R 755 /var/www/html

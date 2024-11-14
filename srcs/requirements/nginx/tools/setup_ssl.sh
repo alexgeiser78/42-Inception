@@ -3,7 +3,7 @@
 mkdir -p /etc/nginx/ssl
 #Create a directory to store the certificate and the private key
 
-RUN openssl req -newkey rsa:4096 \
+openssl req -newkey rsa:4096 \
         -x509 \
         -sha256 \
         -days 365 \
