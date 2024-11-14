@@ -16,8 +16,8 @@ if [ ! -d "$path" ]; then
         exit 1
     fi
 fi
-echo -e "\033[0;32mThe path has been set to $path, relaunch make\033[0m"
-#echo "Run "make" again to start the services"
+echo -e "\033[0;32mThe path has been set to $path\033[0m"
+echo "Run "make" again to start the services"
 
 echo "$path" > srcs/requirements/tools/path.txt
 #stores the path in path.txt
