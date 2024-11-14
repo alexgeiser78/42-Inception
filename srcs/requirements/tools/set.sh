@@ -6,7 +6,7 @@ read path
 
 
 if [ ! -d "$path" ]; then
-	echo -e "\033[0;31mThis directory does not exist.\033[0m\033[0;32mDo you want to create it? (y/n)\033[0m"
+	echo -e "\033[0;31mThis directory does not exist. \033[0m\033[0;32mDo you want to create it? (y/n)\033[0m"
 	read create_dir
     if [ "$create_dir" = "y" ]; then
         mkdir -p "$path"
