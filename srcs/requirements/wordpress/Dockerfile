@@ -17,9 +17,8 @@ RUN apt-get update && \
 #remove the package lists to reduce the docker image size
 
 #Install WP-CLI
-RUN curl -o https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-chmod +x wp-cli.phar && \
-mv wp-cli.phar /usr/local/bin/wp
+RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+chmod +x /usr/local/bin/wp
 
 RUN mkdir -p /var/www/html && \
 curl -fsSL https://packages.sury.org/php/README.txt | bash - && \
